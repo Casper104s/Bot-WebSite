@@ -3,9 +3,9 @@
 
 A modern, responsive website for the Razor Discord Bot built with React, TypeScript, and Tailwind CSS.
 
-![Razor Bot](https://cdn.discordapp.com/attachments/1353227558459801710/1402862019404890183/image.png?ex=68957491&is=68942311&hm=69821be25976deca12e378068ef16c750e6014ba24dab5e28b5d5713f359e875&)
+![Razor Bot](https://imgur.com/a/taqZqdT)
 ![Premium Section](https://i.imgur.com/KfpXBqb.png)
-![Dashboard Section](https://media.discordapp.net/attachments/1353227558459801710/1402498274262388776/image.png?ex=689421cd&is=6892d04d&hm=c3443b99dfaece5d69b76825a5c32865c4732fb04ebe4b81cc48d77e53f1c8f3&=&format=webp&quality=lossless&width=1515&height=825)
+![Dashboard Section](https://imgur.com/a/ScZmQdB)
 
 ## Features ✨
 
