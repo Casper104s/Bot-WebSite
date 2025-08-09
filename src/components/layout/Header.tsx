@@ -56,7 +56,9 @@ export function Header() {
                 onClick={() => handleNavClick('updates')} 
                 className="text-gray-400 hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-white/10"
               >
-                Updates
+                <Link to="/updates" className="text-gray-400 hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-white/10">
+                  Updates
+                </Link>
               </button>
               {siteConfig.features.enableDashboard && (
                 <a 
@@ -107,7 +109,9 @@ export function Header() {
                   onClick={() => handleNavClick('updates')} 
                   className="text-left text-gray-400 hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-white/10"
                 >
-                  Updates
+                  <Link to="/updates" className="text-gray-400 hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-white/10">
+                    Updates
+                  </Link>
                 </button>
                 {siteConfig.features.enableDashboard && (
                   <a 
