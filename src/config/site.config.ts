@@ -74,7 +74,7 @@ export const siteConfig: SiteConfig = {
   footerLinks: {
     contact: [
       { label: "Casper", url: "https://casper.104shop.xyz" }, // u can change this
-      { label: "idk", url: "domain.com" } // i let you figure this out
+      { label: "Smiley-devv", url: "https://github.com/Smiley-Devv/Bot-WebSite" } // added my contribution as a contact   you're free to  delete me off this but i'd appreciate it!
     ],
     resources: [
       { label: "Documentation", url: "https://docs.domain.com" },
