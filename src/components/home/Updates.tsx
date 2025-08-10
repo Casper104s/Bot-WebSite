@@ -1,7 +1,6 @@
 import { Clock, Sparkles } from 'lucide-react';
 import { updates, UpdateChange } from '../../config/updates.config';
 
-
 const getChangeIcon = (type: UpdateChange['type']) => {
   switch (type) {
     case 'feature':
@@ -46,13 +45,11 @@ export function Updates() {
               >
                 <div className="flex flex-col md:flex-row gap-8">
                   <div className="flex-shrink-0">
-                    <div
-                      className={`p-4 rounded-xl bg-gradient-to-br ${
-                        update.isHighlighted
-                          ? 'from-blue-500 to-purple-500'
-                          : 'from-gray-500 to-gray-600'
-                      } bg-opacity-10`}
-                    >
+                    <div className={`p-4 rounded-xl bg-gradient-to-br ${
+                      update.isHighlighted 
+                        ? 'from-blue-500 to-purple-500' 
+                        : 'from-gray-500 to-gray-600'
+                    } bg-opacity-10`}>
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                   </div>
@@ -75,7 +72,10 @@ export function Updates() {
 
                     <div className="grid md:grid-cols-2 gap-4">
                       {update.changes.map((change, i) => (
-                        <div key={i} className="flex items-start gap-3 group">
+                        <div
+                          key={i}
+                          className="flex items-start gap-3 group"
+                        >
                           <div className="flex-shrink-0 mt-1">
                             {getChangeIcon(change.type)}
                           </div>
