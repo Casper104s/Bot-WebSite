@@ -1,5 +1,5 @@
 import { Clock, Sparkles } from 'lucide-react';
-import { updates, UpdateChange } from 'src/pages/Updates.tsx';
+import { updates, UpdateChange } from '../..';
 
 const getChangeIcon = (type: UpdateChange['type']) => {
   switch (type) {
