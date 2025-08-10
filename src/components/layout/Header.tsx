@@ -11,7 +11,9 @@ export function Header() {
   const handleNavClick = (sectionId: string) => {
     setIsMobileMenuOpen(false);
     
-    if (location.pathname !== '/') {
+    if (sectionId === 'updates') {
+      navigate('/updates');
+    } else if (location.pathname !== '/') {
       navigate('/', { state: { scrollTo: sectionId } });
     } else {
       const element = document.getElementById(sectionId);
@@ -56,9 +58,7 @@ export function Header() {
                 onClick={() => handleNavClick('updates')} 
                 className="text-gray-400 hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-white/10"
               >
-                <Link to="/updates" className="text-gray-400 hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-white/10">
-                  Updates
-                </Link>
+                Updates
               </button>
               {siteConfig.features.enableDashboard && (
                 <a 
@@ -109,9 +109,7 @@ export function Header() {
                   onClick={() => handleNavClick('updates')} 
                   className="text-left text-gray-400 hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-white/10"
                 >
-                  <Link to="/updates" className="text-gray-400 hover:text-white transition-colors font-medium px-2 py-1 rounded-md hover:bg-white/10">
-                    Updates
-                  </Link>
+                  Updates
                 </button>
                 {siteConfig.features.enableDashboard && (
                   <a 
