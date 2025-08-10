@@ -1,5 +1,5 @@
 import { Clock, Sparkles } from 'lucide-react';
-import { updates, UpdateChange } from '../config/updates.config';
+import { updates, UpdateChange } from '../../config/updates.config';
 
 const getChangeIcon = (type: UpdateChange['type']) => {
   switch (type) {
@@ -39,17 +39,17 @@ export function Updates() {
             return (
               <div
                 key={index}
-                className={glass rounded-2xl p-8 hover:scale-[1.02] transition-all duration-300 ${
+                className={`glass rounded-2xl p-8 hover:scale-[1.02] transition-all duration-300 ${
                   update.isHighlighted ? 'border border-blue-500/20' : ''
-                }
+                }`}
               >
                 <div className="flex flex-col md:flex-row gap-8">
                   <div className="flex-shrink-0">
-                    <div className={p-4 rounded-xl bg-gradient-to-br ${
+                    <div className={`p-4 rounded-xl bg-gradient-to-br ${
                       update.isHighlighted 
                         ? 'from-blue-500 to-purple-500' 
                         : 'from-gray-500 to-gray-600'
-                    } bg-opacity-10}>
+                    } bg-opacity-10`}>
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                   </div>
