@@ -41,7 +41,7 @@ export function Updates() {
                 key={index}
                 className={glass rounded-2xl p-8 hover:scale-[1.02] transition-all duration-300 ${
                   update.isHighlighted ? 'border border-blue-500/20' : ''
-                }}
+                }
               >
                 <div className="flex flex-col md:flex-row gap-8">
                   <div className="flex-shrink-0">
