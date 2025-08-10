@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import Commands from './Commands.tsx';
 import Premium from './pages/Premium.tsx';
-import Updates from './pages/Updates.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import DashboardLogin from './pages/DashboardLogin.tsx';
 import DashboardCallback from './pages/DashboardCallback.tsx';
@@ -48,10 +47,6 @@ const router = createBrowserRouter([
   {
     path: "/premium",
     element: <Premium />
-  },
-  {
-    path: "/updates",
-    element: <Updates />
   },
   {
     path: "/dashboard",
