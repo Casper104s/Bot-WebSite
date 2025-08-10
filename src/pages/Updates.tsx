@@ -1,94 +1,95 @@
 import { Clock, Sparkles } from 'lucide-react';
+import { Clock, Sparkles } from 'lucide-react';
 import { updates, UpdateChange } from '../../config/updates.config';
 
 const getChangeIcon = (type: UpdateChange['type']) => {
-  const size = 'w-3 h-3';
   switch (type) {
     case 'feature':
-      return <Sparkles className={`${size} text-blue-500`} />;
+      return <Sparkles className="w-3 h-3 text-blue-500" />;
     case 'fix':
-      return <Sparkles className={`${size} text-green-500`} />;
+      return <Sparkles className="w-3 h-3 text-green-500" />;
     case 'improvement':
-      return <Sparkles className={`${size} text-purple-500`} />;
+      return <Sparkles className="w-3 h-3 text-purple-500" />;
     case 'security':
-      return <Sparkles className={`${size} text-red-500`} />;
+      return <Sparkles className="w-3 h-3 text-red-500" />;
     default:
-      return <Sparkles className={`${size} text-gray-500`} />;
+      return <Sparkles className="w-3 h-3 text-gray-500" />;
   }
 };
 
-export function UpdatesWidget() {
+export function Updates() {
   return (
-    <div className="glass rounded-lg p-4 w-full max-w-md h-80 flex flex-col">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-1.5 text-sm font-medium text-gray-200">
-          <Sparkles className="w-3 h-3 text-yellow-400" />
-          What's New
+    <section id="updates" className="w-full py-16">
+      <div className="max-w-[1800px] mx-auto px-4">
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-medium mb-4">
+            <Sparkles className="w-3 h-3 text-yellow-400" />
+            <span className="text-gray-300">What's New</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
+            Latest Updates
+          </h2>
+          <p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Stay up to date with the latest features and improvements
+          </p>
         </div>
-      </div>
 
-      <div className="overflow-y-auto pr-1 space-y-3">
-        {updates.map((update, index) => {
-          const Icon = update.icon;
-          return (
-            <div
-              key={index}
-              className={`rounded-md p-3 ${
-                update.isHighlighted
-                  ? 'border border-blue-500/20'
-                  : 'border border-gray-700/30'
-              }`}
-            >
-              <div className="flex gap-2">
-                <div
-                  className={`p-1.5 rounded bg-gradient-to-br ${
-                    update.isHighlighted
-                      ? 'from-blue-500 to-purple-500'
-                      : 'from-gray-500 to-gray-600'
-                  } bg-opacity-10 flex items-center justify-center`}
-                >
-                  <Icon className="w-4 h-4 text-white" />
-                </div>
-
-                <div className="flex-grow">
-                  <div className="flex flex-wrap items-center gap-1">
-                    <h3 className="text-sm font-semibold">{update.title}</h3>
-                    <span className="px-1.5 py-0.5 rounded-full glass text-[10px] font-medium text-blue-400">
-                      {update.version}
-                    </span>
-                    <span className="flex items-center gap-1 text-[10px] text-gray-400">
-                      <Clock className="w-3 h-3" />
-                      {update.date}
-                    </span>
+        <div className="space-y-6">
+          {updates.map((update, index) => {
+            const Icon = update.icon;
+            return (
+              <div
+                key={index}
+                className={`glass rounded-2xl p-5 hover:scale-[1.02] transition-all duration-300 ${
+                  update.isHighlighted ? 'border border-blue-500/20' : ''
+                }`}
+              >
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <div
+                      className={`p-3 rounded-xl bg-gradient-to-br ${
+                        update.isHighlighted
+                          ? 'from-blue-500 to-purple-500'
+                          : 'from-gray-500 to-gray-600'
+                      } bg-opacity-10`}
+                    >
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
                   </div>
 
-                  <p className="text-xs text-gray-400 mt-1 line-clamp-2">
-                    {update.description}
-                  </p>
-
-                  <div className="mt-2 space-y-1">
-                    {update.changes.slice(0, 2).map((change, i) => (
-                      <div key={i} className="flex items-start gap-1.5">
-                        <div className="flex-shrink-0 mt-[1px]">
-                          {getChangeIcon(change.type)}
-                        </div>
-                        <span className="text-xs text-gray-300">
-                          {change.description}
+                  <div className="flex-grow">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <h3 className="text-lg font-bold">{update.title}</h3>
+                      <div className="flex items-center gap-3">
+                        <span className="px-2 py-0.5 rounded-full glass text-xs font-medium text-blue-400">
+                          {update.version}
+                        </span>
+                        <span className="flex items-center gap-1 text-xs text-gray-400">
+                          <Clock className="w-3 h-3" />
+                          {update.date}
                         </span>
                       </div>
-                    ))}
-                    {update.changes.length > 2 && (
-                      <span className="text-[10px] text-gray-500">
-                        +{update.changes.length - 2} more
-                      </span>
-                    )}
+                    </div>
+
+                    <p className="text-sm text-gray-400 mb-4">{update.description}</p>
+
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {update.changes.map((change, i) => (
+                        <div key={i} className="flex items-start gap-2 group">
+                          <div className="flex-shrink-0 mt-0.5">{getChangeIcon(change.type)}</div>
+                          <span className="text-xs text-gray-300 group-hover:text-white transition-colors">
+                            {change.description}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
