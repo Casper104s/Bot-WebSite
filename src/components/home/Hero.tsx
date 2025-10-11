@@ -64,7 +64,7 @@ export function Hero() {
           Enhance your server experience with seamless integration.
         </p>
 
-        {/* Bot Stats Display */}
+        {/* Bot Stats Display - Only this section is new */}
         {!loading && botInfo && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
             <div className="bg-white p-4 rounded-lg shadow-sm border">
