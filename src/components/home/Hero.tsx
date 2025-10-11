@@ -1,8 +1,67 @@
+import React, { useState, useEffect } from 'react';
 import { Bot, Sparkles, Users, Server, Gauge, ArrowRight, Zap, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/site.config';
 
+interface BotInfo {
+  success?: boolean;
+  bot?: {
+    username?: string;
+    avatar?: string;
+    discriminator?: string;
+    id?: string;
+  };
+  stats?: {
+    guilds?: number;
+    users?: number;
+    commands?: number;
+    uptime?: number;
+    memory?: number;
+    ping?: number;
+  };
+  features?: {
+    music?: boolean;
+    moderation?: boolean;
+    economy?: boolean;
+    leveling?: boolean;
+    welcome?: boolean;
+    tickets?: boolean;
+  };
+  [key: string]: any;
+}
+
 export function Hero() {
+  const [botInfo, setBotInfo] = useState<BotInfo | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchBotInfo = async () => {
+      try {
+        setLoading(true);
+        const proxyUrl = 'https://corsproxy.io/?';
+        const targetUrl = 'http://176.118.198.241:1510/bot-info';
+        
+        const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+        
+        if (response.ok) {
+          const data: BotInfo = await response.json();
+          setBotInfo(data);
+        }
+      } catch (error) {
+        console.error('Error fetching bot info:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBotInfo();
+  }, []);
+
+  // Use live data if available, otherwise fallback to config
+  const liveServers = botInfo?.stats?.guilds || siteConfig.totalServers;
+  const liveUsers = botInfo?.stats?.users || siteConfig.totalUsers;
+  const liveUptime = botInfo?.stats?.uptime ? Math.floor(botInfo.stats.uptime / 3600) + 'h' : '99.9%';
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-32 overflow-hidden">
       {/* Enhanced Background Effects */}
@@ -96,7 +155,7 @@ export function Hero() {
             </div>
             <span className="text-gray-300">Online & Ready</span>
             <div className="w-px h-4 bg-white/20" />
-            <span className="text-green-400 font-semibold">{siteConfig.totalServers}+ Servers</span>
+            <span className="text-green-400 font-semibold">{liveServers}+ Servers</span>
           </div>
         </div>
 
@@ -134,7 +193,7 @@ export function Hero() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-600/20 mb-4 group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 border-0">
               <Users className="w-8 h-8 text-blue-400" />
             </div>
-            <div className="text-3xl font-bold text-blue-300 mb-1">{siteConfig.totalUsers}+</div>
+            <div className="text-3xl font-bold text-blue-300 mb-1">{liveUsers}+</div>
             <div className="text-sm text-gray-400 font-medium">Active Users</div>
           </div>
           
@@ -142,7 +201,7 @@ export function Hero() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/10 to-purple-600/20 mb-4 group-hover:shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300 border-0">
               <Server className="w-8 h-8 text-purple-400" />
             </div>
-            <div className="text-3xl font-bold text-purple-300 mb-1">{siteConfig.totalServers}+</div>
+            <div className="text-3xl font-bold text-purple-300 mb-1">{liveServers}+</div>
             <div className="text-sm text-gray-400 font-medium">Servers</div>
           </div>
           
@@ -150,7 +209,7 @@ export function Hero() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/10 to-pink-600/20 mb-4 group-hover:shadow-lg group-hover:shadow-pink-500/25 transition-all duration-300 border-0">
               <Gauge className="w-8 h-8 text-pink-400" />
             </div>
-            <div className="text-3xl font-bold text-pink-300 mb-1">99.9%</div>
+            <div className="text-3xl font-bold text-pink-300 mb-1">{liveUptime}</div>
             <div className="text-sm text-gray-400 font-medium">Uptime</div>
           </div>
           
