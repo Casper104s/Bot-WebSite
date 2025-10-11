@@ -134,7 +134,7 @@ export function Hero() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-600/20 mb-4 group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 border-0">
               <Users className="w-8 h-8 text-blue-400" />
             </div>
-            <div className="text-3xl font-bold text-blue-300 mb-1">{siteConfig.totalUsers}K+</div>
+            <div className="text-3xl font-bold text-blue-300 mb-1">{siteConfig.totalUsers}+</div>
             <div className="text-sm text-gray-400 font-medium">Active Users</div>
           </div>
           
