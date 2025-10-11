@@ -1,91 +1,106 @@
-import { Bot, Sparkles, Users, Server, Gauge } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { siteConfig } from '../../config/site.config';
+import React, { useState, useEffect } from 'react';
+import { Bot } from 'lucide-react';
+
+interface BotInfo {
+  success: boolean;
+  bot: {
+    username: string;
+    avatar: string;
+    discriminator: string;
+  };
+  stats: {
+    guilds: number;
+    users: number;
+    commands: number;
+    uptime: number;
+  };
+  features: {
+    music: boolean;
+    moderation: boolean;
+    economy: boolean;
+  };
+}
 
 export function Hero() {
+  const [botInfo, setBotInfo] = useState<BotInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBotInfo = async () => {
+      try {
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const targetUrl = 'http://176.118.198.241:1510/bot-info';
+        
+        const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+        const data: BotInfo = await response.json();
+        
+        setBotInfo(data);
+      } catch (error) {
+        console.error('Error fetching bot info:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBotInfo();
+  }, []);
+
   return (
-    <section className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-4 pt-32">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-[120px] animate-pulse-slow" />
-      </div>
-
-      <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-6">
-        <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
-          {siteConfig.botName}
-        </span>
-      </h1>
-      <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10">
-        {siteConfig.botDescription}
-      </p>
-
-      <div className="relative mx-auto mb-6">
-        <div className="w-40 h-40 rounded-full glass flex items-center justify-center mx-auto shadow-2xl border border-white/10 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 overflow-hidden">
-          {siteConfig.botAvatarUrl ? (
-            <img
-              src={siteConfig.botAvatarUrl}
-              alt={siteConfig.botName + ' avatar'}
-              className="w-full h-full object-cover rounded-full border-4 border-white/10 shadow-lg"
-            />
-          ) : (
-            <Bot className="w-24 h-24 text-white drop-shadow-lg" />
-          )}
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto text-center">
+        <div className="flex justify-center mb-8">
+          <div className="bg-blue-100 p-4 rounded-full">
+            <Bot className="h-12 w-12 text-blue-600" />
+          </div>
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-2xl opacity-60 -z-10" />
-      </div>
+        
+        <h1 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-6">
+          Your Ultimate
+          <span className="text-blue-600 block">Discord Bot</span>
+        </h1>
+        
+        <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          Powerful, feature-rich Discord bot with music, moderation, economy, and more. 
+          Enhance your server experience with seamless integration.
+        </p>
 
-      <div className="flex flex-col items-center gap-2 mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium">
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-gray-300">Online</span>
-        </div>
-        <span className="text-sm text-gray-400">Ready to serve {siteConfig.totalServers}+ servers</span>
-      </div>
-
-      <div className="flex flex-wrap gap-4 justify-center mb-10">
-        <a
-          href="#"
-          className="relative overflow-hidden group px-8 py-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl border border-white/10 hover:shadow-[0_0_2rem_-0.5rem_#3b82f6] transition-all duration-300 text-white font-semibold text-lg flex items-center gap-3 backdrop-blur-xl"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          <span className="relative flex items-center gap-2">
-            <Bot className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-            Add to Discord
-          </span>
-        </a>
-        {siteConfig.features.enableCommands && (
-          <Link
-            to="/commands"
-            className="relative overflow-hidden group px-8 py-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl border border-white/10 hover:shadow-[0_0_2rem_-0.5rem_#3b82f6] transition-all duration-300 text-white font-semibold text-lg flex items-center gap-3 backdrop-blur-xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <span className="relative flex items-center gap-2">
-              <Sparkles className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-              View Commands
-            </span>
-          </Link>
+        {/* Bot Stats Display */}
+        {!loading && botInfo && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
+            <div className="bg-white p-4 rounded-lg shadow-sm border">
+              <div className="text-2xl font-bold text-blue-600">{botInfo.stats.guilds}</div>
+              <div className="text-sm text-gray-600">Servers</div>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-sm border">
+              <div className="text-2xl font-bold text-blue-600">{botInfo.stats.users}</div>
+              <div className="text-sm text-gray-600">Users</div>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-sm border">
+              <div className="text-2xl font-bold text-blue-600">{botInfo.stats.commands}</div>
+              <div className="text-sm text-gray-600">Commands</div>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-sm border">
+              <div className="text-2xl font-bold text-blue-600">
+                {Math.floor(botInfo.stats.uptime / 3600)}h
+              </div>
+              <div className="text-sm text-gray-600">Uptime</div>
+            </div>
+          </div>
         )}
-      </div>
 
-      <div className="flex flex-wrap justify-center gap-8 mt-2">
-        <div className="flex flex-col items-center">
-          <Users className="w-8 h-8 mb-1 text-blue-400" />
-          <span className="text-xl font-bold text-blue-300">{siteConfig.totalUsers}</span>
-          <span className="text-xs text-gray-400">Active Users</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <Server className="w-8 h-8 mb-1 text-purple-400" />
-          <span className="text-xl font-bold text-purple-300">{siteConfig.totalServers}+</span>
-          <span className="text-xs text-gray-400">Servers</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <Gauge className="w-8 h-8 mb-1 text-pink-400" />
-          <span className="text-xl font-bold text-pink-300">99.9%</span>
-          <span className="text-xs text-gray-400">Uptime</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <Bot className="w-8 h-8 mb-1 text-indigo-400" />
-          <span className="text-xl font-bold text-indigo-300">v{siteConfig.botVersion}</span>
-          <span className="text-xs text-gray-400">Version</span>
+        {loading && (
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="text-gray-600">Loading bot statistics...</div>
+          </div>
+        )}
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            Add to Discord
+          </button>
+          <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+            View Commands
+          </button>
         </div>
       </div>
     </section>
