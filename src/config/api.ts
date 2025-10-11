@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  BASE_URL: 'http://176.118.198.241:1510',
+  BASE_URL: 'https://api.allorigins.win/raw?url=http://176.118.198.241:1510',
   ENDPOINTS: {
     BOT_INFO: '/bot-info'
   },
