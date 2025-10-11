@@ -24,6 +24,7 @@ interface BotInfo {
 export function Hero() {
   const [botInfo, setBotInfo] = useState<BotInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchBotInfo = async () => {
@@ -32,11 +33,23 @@ export function Hero() {
         const targetUrl = 'http://176.118.198.241:1510/bot-info';
         
         const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data: BotInfo = await response.json();
         
+        // Validate the data structure
+        if (!data.success || !data.stats) {
+          throw new Error('Invalid bot info data structure');
+        }
+        
         setBotInfo(data);
-      } catch (error) {
-        console.error('Error fetching bot info:', error);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching bot info:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load bot information');
       } finally {
         setLoading(false);
       }
@@ -64,8 +77,8 @@ export function Hero() {
           Enhance your server experience with seamless integration.
         </p>
 
-        {/* Bot Stats Display - Only this section is new */}
-        {!loading && botInfo && (
+        {/* Bot Stats Display */}
+        {!loading && botInfo && botInfo.stats && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
             <div className="bg-white p-4 rounded-lg shadow-sm border">
               <div className="text-2xl font-bold text-blue-600">{botInfo.stats.guilds}</div>
@@ -91,6 +104,12 @@ export function Hero() {
         {loading && (
           <div className="max-w-2xl mx-auto mb-8">
             <div className="text-gray-600">Loading bot statistics...</div>
+          </div>
+        )}
+
+        {error && (
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="text-red-600">Error: {error}</div>
           </div>
         )}
 
