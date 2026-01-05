@@ -19,8 +19,10 @@ export function Stats({ stats }: StatsProps) {
           <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
             Real-time Statistics
           </h2>
+          
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Monitor Razor's performance and impact across Discord
+
           </p>
         </div>
 

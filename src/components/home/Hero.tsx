@@ -2,7 +2,65 @@ import { Bot, Sparkles, Users, Server, Gauge, ArrowRight, Zap, Star } from 'luci
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/site.config';
 
+interface BotInfo {
+  success?: boolean;
+  bot?: {
+    username?: string;
+    avatar?: string;
+    discriminator?: string;
+    id?: string;
+  };
+  stats?: {
+    guilds?: number;
+    users?: number;
+    commands?: number;
+    uptime?: number;
+    memory?: number;
+    ping?: number;
+  };
+  features?: {
+    music?: boolean;
+    moderation?: boolean;
+    economy?: boolean;
+    leveling?: boolean;
+    welcome?: boolean;
+    tickets?: boolean;
+  };
+  [key: string]: any;
+}
+
 export function Hero() {
+  const [botInfo, setBotInfo] = useState<BotInfo | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchBotInfo = async () => {
+      try {
+        setLoading(true);
+        const proxyUrl = 'https://corsproxy.io/?';
+        const targetUrl = 'http://176.118.198.241:1510/bot-info';
+        
+        const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+        
+        if (response.ok) {
+          const data: BotInfo = await response.json();
+          setBotInfo(data);
+        }
+      } catch (error) {
+        console.error('Error fetching bot info:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBotInfo();
+  }, []);
+
+  // Use live data if available, otherwise fallback to config
+  const liveServers = botInfo?.stats?.guilds || siteConfig.totalServers;
+  const liveUsers = botInfo?.stats?.users || siteConfig.totalUsers;
+  const liveUptime = botInfo?.stats?.uptime ? Math.floor(botInfo.stats.uptime / 3600) + 'h' : '99.9%';
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-32 overflow-hidden">
       {/* Enhanced Background Effects */}
@@ -96,7 +154,7 @@ export function Hero() {
             </div>
             <span className="text-gray-300">Online & Ready</span>
             <div className="w-px h-4 bg-white/20" />
-            <span className="text-green-400 font-semibold">{siteConfig.totalServers}+ Servers</span>
+            <span className="text-green-400 font-semibold">{liveServers}+ Servers</span>
           </div>
         </div>
 
