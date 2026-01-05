@@ -4,6 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import Commands from './Commands.tsx';
 import Premium from './pages/Premium.tsx';
+import Dashboard from './pages/Dashboard.tsx';
+import DashboardLogin from './pages/DashboardLogin.tsx';
+import DashboardCallback from './pages/DashboardCallback.tsx';
 import TermsOfService from './pages/TermsOfService.tsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.tsx';
 import NotFound from './pages/NotFound.tsx';
@@ -44,6 +47,18 @@ const router = createBrowserRouter([
   {
     path: "/premium",
     element: <Premium />
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />
+  },
+  {
+    path: "/dashboard/login",
+    element: <DashboardLogin />
+  },
+  {
+    path: "/dashboard/callback",
+    element: <DashboardCallback />
   },
   {
     path: "/terms",

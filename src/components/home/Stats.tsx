@@ -12,15 +12,21 @@ export function Stats({ stats }: StatsProps) {
     <section id="stats" className="w-full py-32">
       <div className="max-w-[1800px] mx-auto px-4">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium mb-6">
+            <Activity className="w-4 h-4 text-green-400" />
+            <span className="text-gray-300">Live Performance Metrics</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
             Real-time Statistics
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Monitor XNVD's performance and impact across Discord
+          
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Monitor Razor's performance and impact across Discord
+
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           <StatCard
             icon={Users}
             value={stats?.totalUsers}
@@ -127,7 +133,7 @@ function StatCard({ icon: Icon, value, label, gradient, suffix = "+", formatter 
   }, [value]);
 
   return (
-    <div className="glass rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+    <div className="glass-border rounded-2xl p-8 hover:scale-105 transition-all duration-300">
       <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${gradient} bg-opacity-10 mb-4`}>
         <Icon className="w-8 h-8 text-white" />
       </div>

@@ -21,10 +21,14 @@ export function Updates() {
     <section id="updates" className="w-full py-32">
       <div className="max-w-[1800px] mx-auto px-4">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium mb-6">
+            <Sparkles className="w-4 h-4 text-yellow-400" />
+            <span className="text-gray-300">What's New</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
             Latest Updates
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Stay up to date with the latest features and improvements
           </p>
         </div>

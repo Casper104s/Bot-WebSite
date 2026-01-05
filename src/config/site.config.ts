@@ -36,36 +36,50 @@ export interface SiteConfig {
     enableCommands: boolean;
     enableDashboard: boolean;
   };
+  
+  discord: {
+    clientId: string;
+    redirectUri: string;
+    scopes: string[];
+  };
 }
 
 // Default configuration
 export const siteConfig: SiteConfig = {
-  botName: "XNVD Bot", //hero
+  botName: "Razor Bot", //hero
   botDescription: "A powerful Discord bot that brings advanced features and seamless automation to your server.",
   botVersion: "1.0.4",
-  totalServers: 20,
-  totalUsers: 486, // 11 = 11k to remove the k, go in components/home/hero.tsx and remove/change the K at line 72
-  botAvatarUrl: "https://cdn.discordapp.com/avatars/1340384312272359476/a_6c218dbfc661090e4ddb8e73a1e2a601.gif?size=256?size=512",
+  totalServers: 30,
+  totalUsers: 11, // 11 = 11k to remove the k, go in components/home/hero.tsx and remove/change the K at line 72
+  botAvatarUrl: "https://cdn.discordapp.com/avatars/336603767015211008/65641a04db4750063d62b4b44145efbd.png?size=256?size=512",
   
-  contactEmail: "soon",
-  supportEmail: "soon",
+  contactEmail: "contact@domain.com",
+  supportEmail: "support@domain.com",
   
   socialLinks: [
     {
       platform: "Discord", //don't change
-      url: "https://discord.gg/xJjMEyqHpc",
+      url: "https://discord.gg/104shop",
     },
+    {
+      platform: "GitHub", //don't change
+      url: "https://github.com/casper104s",
+    },
+    {
+      platform: "Twitter", //don't change
+      url: "https://twitter.com/",
+    }
   ],
   
   footerLinks: {
     contact: [
-      { label: "Itermitas", url: "https://itermitas.com/" }, // u can change this
-      { label: "Panel", url: "https://panel.itermitas.com" } // i let you figure this out
+      { label: "Casper", url: "https://casper.104shop.xyz" }, // u can change this
+      { label: "idk", url: "domain.com" } // i let you figure this out
     ],
     resources: [
       { label: "Documentation", url: "https://docs.domain.com" },
       { label: "Blog", url: "domain.com" },
-      { label: "Support", url: "https://discord.gg/xJjMEyqHpc" }
+      { label: "Support", url: "domain.com" }
     ],
     legal: [
       { label: "Privacy Policy", url: "/privacy" },
@@ -74,13 +88,20 @@ export const siteConfig: SiteConfig = {
   },
   
   
-  siteName: "XNVD", //footer
+  siteName: "Razor", //footer
   siteDescription: "A powerful Discord bot that brings advanced features and seamless automation to your server.", //footer
-  siteUrl: "https://xnvd.itermitas.com",
+  siteUrl: "https://domain.com",
 
   features: {
     enableCommands: true,
     enableDashboard: true
+  },
+  
+  // chmqp dashboard enjoy
+  discord: {
+    clientId: "AddyourclientID", // Replace with your Discord application client ID
+    redirectUri: "http://localhost:5173/dashboard/callback", // Update for production
+    scopes: ["identify", "guilds"]
   }
 };
 

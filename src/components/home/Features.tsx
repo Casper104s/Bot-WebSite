@@ -1,4 +1,4 @@
-import { Shield, Settings, Music, DollarSign, Wrench, Gift, Ticket, BarChart, MessageSquare, Gamepad, Image, Bot } from 'lucide-react';
+import { Shield, Settings, Music, DollarSign, Wrench, Gift, Ticket, BarChart, MessageSquare, Gamepad, Image, Bot, Sparkles } from 'lucide-react';
 
 const features = [
   {
@@ -77,49 +77,57 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="py-32 relative">
+    <section id="features" className="py-32 relative overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-[100px] animate-float" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-[100px] animate-float-delayed" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-[120px] animate-float" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/15 rounded-full blur-[120px] animate-float-delayed" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-full blur-[150px]" />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium mb-6">
+            <Sparkles className="w-4 h-4 text-blue-400" />
+            <span className="text-gray-300">Comprehensive Feature Set</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
             Powerful Features
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Everything you need to create an engaging Discord community
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <div
                 key={index}
-                className="group feature-card"
+                className="group feature-card relative"
                 style={{
                   animationDelay: `${index * 0.1}s`
                 }}
               >
-                <div className="relative">
+                <div className="relative p-8 glass-border rounded-2xl hover:bg-white/[0.08] transition-all duration-500 transform hover:scale-105 hover:-translate-y-2">
+                  {/* Hover glow effect */}
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl`} />
+                  
                   <div className="flex items-center gap-4">
-                    <div className={`p-4 rounded-xl bg-gradient-to-br ${feature.gradient} bg-opacity-10 group-hover:scale-110 transition-transform duration-500`}>
-                      <Icon className={`w-6 h-6 text-white`} />
+                    <div className={`p-4 rounded-xl bg-gradient-to-br ${feature.gradient} bg-opacity-20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg`}>
+                      <Icon className={`w-7 h-7 text-white drop-shadow-lg`} />
                     </div>
-                    <h3 className="text-lg font-semibold tracking-wide">
+                    <h3 className="text-xl font-bold tracking-wide group-hover:text-white transition-colors duration-300">
                       {feature.title}
                     </h3>
                   </div>
-                </div>
 
-                <p className="mt-4 text-gray-400 text-sm leading-relaxed">
+                  <p className="mt-6 text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                   {feature.description}
                 </p>
 
-                <div className={`mt-4 h-0.5 w-0 group-hover:w-full bg-gradient-to-r ${feature.gradient} transition-all duration-500 ease-out opacity-0 group-hover:opacity-100`} />
+                  <div className={`mt-6 h-1 w-0 group-hover:w-full bg-gradient-to-r ${feature.gradient} transition-all duration-700 ease-out opacity-0 group-hover:opacity-100 rounded-full`} />
+                </div>
               </div>
             );
           })}

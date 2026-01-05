@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { Bot, Sparkles, Users, Server, Gauge, ArrowRight, Zap, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/site.config';
@@ -193,7 +192,7 @@ export function Hero() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-600/20 mb-4 group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 border-0">
               <Users className="w-8 h-8 text-blue-400" />
             </div>
-            <div className="text-3xl font-bold text-blue-300 mb-1">{liveUsers}+</div>
+            <div className="text-3xl font-bold text-blue-300 mb-1">{siteConfig.totalUsers}K+</div>
             <div className="text-sm text-gray-400 font-medium">Active Users</div>
           </div>
           
@@ -201,7 +200,7 @@ export function Hero() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/10 to-purple-600/20 mb-4 group-hover:shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300 border-0">
               <Server className="w-8 h-8 text-purple-400" />
             </div>
-            <div className="text-3xl font-bold text-purple-300 mb-1">{liveServers}+</div>
+            <div className="text-3xl font-bold text-purple-300 mb-1">{siteConfig.totalServers}+</div>
             <div className="text-sm text-gray-400 font-medium">Servers</div>
           </div>
           
@@ -209,7 +208,7 @@ export function Hero() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/10 to-pink-600/20 mb-4 group-hover:shadow-lg group-hover:shadow-pink-500/25 transition-all duration-300 border-0">
               <Gauge className="w-8 h-8 text-pink-400" />
             </div>
-            <div className="text-3xl font-bold text-pink-300 mb-1">{liveUptime}</div>
+            <div className="text-3xl font-bold text-pink-300 mb-1">99.9%</div>
             <div className="text-sm text-gray-400 font-medium">Uptime</div>
           </div>
           
